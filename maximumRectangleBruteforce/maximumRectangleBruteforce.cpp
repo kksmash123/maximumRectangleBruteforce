@@ -3,10 +3,70 @@
 using namespace std;
 
 
-void prefixSum2D()
+
+void sufixSum1D()
 {
+	int a[] = { 10,20,30,40 };
+	int n = sizeof(a) / sizeof(a[0]), k;
+	int p[] = { 0,0,0,0 };
+
+	for (int i = n-1;i>=0;i--)
+	{
+		if (i == n-1)
+			p[i] = a[i];
+		else
+		{
+			k = i +1;
+			p[i] = p[k] + a[i];
+
+		}
+
+	}
+	cout << "sufix array of a -> ";
+	for (int x : p)
+		cout << x << " ";
+	cout << endl;
+
+
 
 }
+
+
+void prefixSum2D()
+{
+	int a[][3] = { {2,3,4},
+				  {10,20,30},
+				  {11,15,16},
+				  {40,80,120} };
+
+	int p[4][3]={0},r=4,c=3,k;
+
+	for (int i = 0;i < r;i++)
+	{
+		for (int j = 0;j < c;j++)
+		{
+			if (j == 0)
+				p[i][j] = a[i][j];
+			else
+			{
+				k = j - 1;
+				p[i][j] = p[i][k] + a[i][j];
+			}
+		}
+
+	}
+
+	for (int i = 0;i < r;i++)
+	{
+		for (int j = 0;j < c;j++)
+		{
+			cout << p[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+}
+
 
 
 void prefixSum1D()
@@ -256,7 +316,9 @@ int main()
 	//printAllSubarrayValues2DArray();
 	//printMaxValue2DSubarray();
 	//printMaxValue2DSubarray2();
-	prefixSum1D();
+	//prefixSum1D();
+	//prefixSum2D();
+	sufixSum1D();
 
 
 	return 0;
