@@ -1,12 +1,68 @@
 #include<iostream>
+#include<vector>
 
 using namespace std;
 
+void MaximumRectangle()
+{
+	vector<vector<int>> a = { {1,2,-1,-4,-20},{-8,-3,4,2,1},{3,8,10,1,3},{-4,-1,1,7,-6} };
+	int r = 4, c = 5, sum = 0, maxs = 0, mt, mb, ml, mr;
+	int p[] = { 0,0,0,0 };
 
+	for (int L = 0;L < c;L++)
+	{
+		for (int R = L;R < c;R++)
+		{
+			for (int i = 0, s = i;i < r;i++)
+			{
+				if (L == R)
+				{
+					p[i] = a[i][R];
+				}
+				else
+				{
+					p[i] = p[i] + a[i][R];
+
+				}
+				//kadane's applied on the p[]
+
+				sum += p[i];
+
+				if (sum < 0)
+				{
+					sum = 0;
+					s = i + 1;
+				}
+				else if (sum > maxs)
+				{
+					maxs = sum;
+					mt = s;
+					mb = i;
+					ml = L;
+					mr = R;
+
+				}
+
+
+			}
+			for (int x : p)
+				cout << x << " ";
+			cout << endl;
+			cout << sum << " -> " << maxs << endl;
+			cout << ml << " ->" << mr << " ->" << mt << " ->" << mb << endl;
+			sum = 0;
+		}
+	}
+
+	cout << "vector" << endl;
+
+
+
+}
 
 void prefixsumofRowOrderKadane()
 {
-	int a[][5] = { {6,-5,-7,4,-4},{-9,3,-6,5,2},{-10,4,7,-6,3},{-8,9,-3,3,-7} };
+	int a[][5] = { {1,2,-1,-4,-20},{-8,-3,4,2,1},{3,8,10,1,3},{-4,-1,1,7,-6} };
 	int r = 4, c = 5,sum=0,maxs=0,mt,mb,ml,mr;
 	int p[] = { 0,0,0,0 };
 
@@ -412,8 +468,8 @@ int main()
 	//prefixSum2D();
 	//sufixSum1D();
 	//prefixsumofRowOrder();
-	prefixsumofRowOrderKadane();
-
+	//prefixsumofRowOrderKadane();
+	MaximumRectangle();
 
 	return 0;
 }
