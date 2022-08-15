@@ -4,6 +4,98 @@ using namespace std;
 
 
 
+void prefixsumofRowOrderKadane()
+{
+	int a[][5] = { {6,-5,-7,4,-4},{-9,3,-6,5,2},{-10,4,7,-6,3},{-8,9,-3,3,-7} };
+	int r = 4, c = 5,sum=0,maxs=0,mt,mb,ml,mr;
+	int p[] = { 0,0,0,0 };
+
+	for (int L = 0;L < c;L++)
+	{
+		for (int R = L;R < c;R++)
+		{
+			for (int i = 0,s=i;i < r;i++)
+			{
+				if (L == R)
+				{
+					p[i] = a[i][R];
+				}
+				else
+				{
+					p[i] = p[i] + a[i][R];
+
+				}
+				//kadane's applied on the p[]
+
+				sum += p[i];
+
+				if (sum < 0)
+				{
+					sum = 0;
+					s = i + 1;
+				}
+				else if (sum > maxs)
+				{
+					maxs = sum;
+					mt = s;
+					mb = i;
+					ml = L;
+					mr = R;
+
+				}
+
+
+			}
+			for (int x : p)
+				cout << x << " ";
+			cout << endl;
+			cout << sum << " -> " << maxs << endl;
+			cout << ml << " ->" << mr << " ->" << mt << " ->" << mb << endl;
+			sum = 0;
+		}
+	}
+
+
+
+
+}
+
+
+void prefixsumofRowOrder()
+{
+	int a[][5] = { {6,-5,-7,4,-4},{-9,3,-6,5,2},{-10,4,7,-6,3},{-8,9,-3,3,-7} };
+	int r = 4, c = 5;
+	int p[]={0,0,0,0};
+
+	for (int L = 0;L < c;L++)
+	{
+		for (int R = L;R < c;R++)
+		{
+			for (int i = 0;i < r;i++)
+			{
+				if (L == R)
+				{
+					p[i] = a[i][R];
+				}
+				else
+				{
+					p[i] = p[i] + a[i][R];
+
+				}
+			}
+			for (int x : p)
+				cout << x << " ";
+			cout << endl;
+		}
+	}
+
+
+
+
+}
+
+
+
 void sufixSum1D()
 {
 	int a[] = { 10,20,30,40 };
@@ -318,7 +410,9 @@ int main()
 	//printMaxValue2DSubarray2();
 	//prefixSum1D();
 	//prefixSum2D();
-	sufixSum1D();
+	//sufixSum1D();
+	//prefixsumofRowOrder();
+	prefixsumofRowOrderKadane();
 
 
 	return 0;
